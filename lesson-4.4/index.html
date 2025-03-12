@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script>
+        let numOrStr = prompt('input number or string');
+        console.log(numOrStr);
+        numOrStr = (numOrStr === null ? 'скасовано' : numOrStr.trim() === '' ? 'пусто' : isNaN(+numOrStr) ? 'NaN' : 'ok')
+
+		switch (numOrStr) {
+			case 'скасовано':
+                console.log('Ви скасували');
+				break;
+			case 'пусто':
+                console.log('Empty String');
+                break;
+            case 'NaN':
+                console.log('number is Ba_NaN');
+                break;
+			default:
+                console.log('OK!')
+		}
+	</script>
+</head>
+<body>
+
+</body>
+</html>

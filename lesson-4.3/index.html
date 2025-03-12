@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script>
+		let currentYear = new Date().getFullYear();
+        let birthYear = prompt('Введіть ваш рік народження') ?? alert('Шкода, що Ви не захотіли ввести свій рік народження');
+        let city = prompt('Введіть місто де ви живите') ?? alert('Шкода, що Ви не захотіли ввести місто де ви живите');
+        let favoriteSport = prompt('Ваш улюблений вид спорту') ?? alert('Шкода, що Ви не захотіли ввести улюблений вид спорту');
+        let getAge = (birthYear) ? 'Вам ' + (currentYear - birthYear) + ' років' : 'Ви не захотів вводити дату народження';
+
+        if (city) {
+            switch (city) {
+				case 'Вашингтон':
+                    city = 'Ви живете у столиці США';
+                    break;
+                case 'Київ':
+                    city = 'Ви живете у столиці України';
+                    break;
+                case 'Лондон':
+                    city = 'Ви живете у столиці Англії';
+                    break;
+				default:
+                    city = `Ви живете у місті ${city}`;
+			}
+        } else {
+            city = 'Ви не захотів\kb вводити місто де ви живите';
+		}
+
+        if (favoriteSport) {
+            if (favoriteSport == 'box' || favoriteSport == 'football' || favoriteSport == 'basketball') {
+                let champion;
+                switch (favoriteSport) {
+					case 'box':
+                        champion = 'Усик';
+                        break;
+					case 'football':
+                        champion = 'Мессі';
+                        break;
+					case 'basketball':
+                        champion = 'Леброн';
+                        break;
+                }
+                alert(`Круто! Хочеш стати як ${champion}?`);
+                favoriteSport = `Ваш улюблений вид спорту ${favoriteSport}`;
+            } else {
+                favoriteSport = `Ваш улюблений вид спорту ${favoriteSport}`;
+			}
+        }
+        else {
+            favoriteSport = 'Ви не захотів вводити улюблений вид спорту';
+        }
+
+		alert(`${getAge}! ${city}! ${favoriteSport}!`);
+	</script>
+</head>
+<body>
+
+</body>
+</html>
