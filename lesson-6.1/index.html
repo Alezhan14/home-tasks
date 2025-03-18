@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script>
+		let userText = prompt('Enter text') ?? console.log('canceled');
+		let userLetters = prompt('Enter letters to remove') ?? console.log('canceled');
+
+		let removeLetters = function (str, letters) {
+			let result = str;
+			userLetters = userLetters.split('');
+			for (let i = 0; i < str.length; i++) {
+				for (let j = 0; j < letters.length; j++) {
+					if (str[i] === letters[j]) {
+						result = result.replace(letters[j], "");
+					}
+				}
+			}
+			console.log(result);
+		}
+
+		if (userText || userLetters) {
+			removeLetters(userText, userLetters);
+		}
+	</script>
+</head>
+<body>
+
+</body>
+</html>

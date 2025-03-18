@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script>
+		let usersArr = prompt('Enter value separated by spaces') ?? console.log('canceled');
+
+		let getArithmeticMean = function (arr) {
+			let result = 0;
+			let counter = 0;
+			arr = arr.split(' ')
+			for (let i = 0; i < arr.length; i++) {
+				if (Number(arr[i])) {
+					result += Number(arr[i])
+					counter++
+				}
+			}
+			console.log(result / counter);
+		}
+
+		getArithmeticMean (usersArr)
+	</script>
+</head>
+<body>
+
+</body>
+</html>
