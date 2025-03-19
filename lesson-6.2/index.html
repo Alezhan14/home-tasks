@@ -4,15 +4,14 @@
 	<meta charset="UTF-8">
 	<title>Title</title>
 	<script>
-		let usersArr = prompt('Enter value separated by spaces') ?? console.log('canceled');
+		let usersArr = [10, 'one', 20, 'two', 30, 'three'];
 
 		let getArithmeticMean = function (arr) {
 			let result = 0;
 			let counter = 0;
-			arr = arr.split(' ')
 			for (let i = 0; i < arr.length; i++) {
-				if (Number(arr[i])) {
-					result += Number(arr[i])
+				if (typeof arr[i] === 'number') {
+					result += arr[i]
 					counter++
 				}
 			}
