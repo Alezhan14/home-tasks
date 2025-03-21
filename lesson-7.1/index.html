@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script>
+		let counter = function () {
+			let counter = 0;
+			return function(number) {
+				counter += +number;
+				console.log(counter);
+			}
+		};
+
+		let addNumber = counter();
+
+		addNumber(3);
+		addNumber(4);
+		addNumber(7);
+
+	</script>
+</head>
+<body>
+
+</body>
+</html>

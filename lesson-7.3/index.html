@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script>
+
+		let isMoreThan100 = function () {
+			for (let i = 1; i <= 10; i++) {
+				let number = prompt('Enter a number from 100 to infinity');
+
+				if ( number < 100 && i < 10) {
+					alert('The number is less than 100. Try again');
+					continue;
+				} else if (typeof number == "string" || number >= 100 || i == 10) {
+					console.log(number);
+					break;
+				}
+			}
+		}
+
+		isMoreThan100()
+	</script>
+</head>
+<body>
+
+</body>
+</html>
