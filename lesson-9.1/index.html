@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script>
+		let company1 = {
+			sales: [{name: 'John', salary: 1000}, {name: 'Alise', salary: 600}],
+			development: {
+				web: [{name: 'Peter', salary: 2000}, {name: 'Alex', salary: 1800}],
+				internals: [{name: 'Jack', salary: 1300}],
+			}
+		};
+
+		let sumSalary = function(company) {
+			let salaries = 0;
+			for (let key in company) {
+				if (Array.isArray(company[key])) {
+					for (let item of company[key]) {
+						salaries += item.salary;
+					}
+				} else if (typeof company[key] === 'object') {
+					salaries += sumSalary(company[key]);
+				}
+			}
+			return salaries;
+		};
+		console.log(sumSalary(company1));
+	</script>
+</head>
+<body>
+
+</body>
+</html>
