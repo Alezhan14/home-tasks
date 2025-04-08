@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script>
+		let contactsBook = {
+			contacts: [
+				{name: 'John', phone: '12121212', email: 'John@gmail.com'},
+				{name: 'Jane', phone: '23232323', email: 'Jane@gmail.com'},
+			],
+
+			addContact: function() {
+				let name = prompt('Write name');
+				let phone = prompt('Write phone');
+				let email = prompt('Write email');
+
+				this.contacts.push({name: name, phone: phone, email: email});
+			},
+			findContact: function() {
+				let name = prompt('Write name');
+
+				for(item of this.contacts) {
+					if(item.name === name) {
+						console.log(item);
+					}
+				}
+			}
+		}
+
+		// contactsBook.addContact();
+		// contactsBook.findContact();
+	</script>
+</head>
+<body>
+
+</body>
+</html>
