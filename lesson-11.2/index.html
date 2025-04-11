@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<style>
+	.container {
+		max-width: 600px;
+		margin: 0 auto;
+		font-size: 30px;
+	}
+	.container.active {
+		color: green;
+	}
+</style>
+<body>
+<div class="container">
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet commodi cumque delectus dicta eos error et fugit molestias neque numquam obcaecati provident quaerat quam reiciendis ullam, voluptatem voluptatum. Consequatur, esse.</p>
+	<button>Click here</button>
+</div>
+<script>
+	let container = document.querySelector('.container');
+	let button = document.querySelector('button');
+
+	button.addEventListener('click', function (){
+		container.classList.toggle('active');
+	})
+
+
+</script>
+</body>
+</html>
