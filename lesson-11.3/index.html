@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<style>
+	.container {
+		max-width: 600px;
+		margin: 0 auto;
+		font-size: 30px;
+	}
+	.container.active {
+		color: green;
+	}
+</style>
+<body>
+<div class="container">
+	<img src="" alt="">
+	<button>Click here</button>
+</div>
+<script>
+	let image = document.querySelector('img');
+	let button = document.querySelector('button');
+
+	let randomImage = function () {
+		let newSrc = Math.floor(Math.random() * (9 - 1 + 1)) + 1 + '.jpg';
+		image.setAttribute('src', newSrc)
+	};
+
+	button.addEventListener('click', randomImage)
+
+</script>
+</body>
+</html>
