@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<table width="600" height="600" border="1" style="border-collapse: collapse; text-align: center">
+	<thead>
+		<tr>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+<script>
+	let tHeadCols = document.getElementsByTagName('th');
+	let tBody = document.getElementsByTagName('tbody')[0];
+	let tBodyRows = tBody.getElementsByTagName('tr');
+	let tBodyCols;
+
+
+	for (let i = 1; i < tHeadCols.length; i++) {
+		tBodyCols = tBodyRows[i - 1].getElementsByTagName('td');
+
+		tHeadCols[i].innerText = i;
+		tBodyCols[0].innerText = i;
+
+		for (let j = 1; j <= tBodyRows.length; j++) {
+			tBodyCols[j].innerText = i * j;
+		}
+	}
+
+	// Другий вариант
+
+	// let newTable = document.createElement('table');
+	// let newTHead = document.createElement('thead');
+	// let newTBody = document.createElement('tbody');
+	// let newTHeadRows = document.createElement('tr');
+	//
+	// document.body.appendChild(newTable);
+	// newTable.appendChild(newTHead);
+	// newTable.appendChild(newTBody);
+	// newTHead.appendChild(newTHeadRows)
+	//
+	// for (let i = 0; i <= 10; i++) {
+	// 	let newTHeadCell = document.createElement('th');
+	// 	let newTBodyRows = document.createElement('tr')
+	// 	newTHeadRows.appendChild(newTHeadCell);
+	//
+	// 	if(i === 0) continue;
+	//
+	// 	newTBody.appendChild(newTBodyRows);
+	//
+	// 	newTHeadCell.innerText = i;
+	//
+	//
+	// 	for (let j = 0; j <= 10; j++) {
+	// 		let newTBodyCell = document.createElement('td')
+	//
+	// 		newTBodyRows.appendChild(newTBodyCell)
+	//
+	// 		if (j == 0) {
+	// 			newTBodyCell.innerText = i
+	// 		} else {
+	// 			newTBodyCell.innerText = i * j;
+	// 		}
+	//
+	// 	}
+	// }
+</script>
+</body>
+</html>
