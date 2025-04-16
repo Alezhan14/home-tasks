@@ -10,9 +10,6 @@
 		margin: 0 auto;
 		font-size: 30px;
 	}
-	.container.active {
-		color: green;
-	}
 
 	button {
 		margin: 0 30px;
@@ -27,23 +24,23 @@
 </div>
 <script>
 	let newUrlEl = document.querySelector('.new-url');
-    let redirectUrlEl = document.querySelector('.redirect-url');
-    let newUrl;
+	let redirectUrlEl = document.querySelector('.redirect-url');
+	let newUrl;
 
 	let askUrl = function() {
-        newUrl = prompt('enter new url');
+		newUrl = prompt('enter new url');
 	}
 
-    let redirectUrl = function() {
-        if(newUrl) {
-            window.location.href = newUrl;
+	let redirectUrl = function() {
+    	if(newUrl) {
+			window.location.href = newUrl;
 		} else {
-            alert("url wasn't entered")
+			alert("url wasn't entered")
 		}
 	}
 
-    newUrlEl.addEventListener('click', askUrl);
-    redirectUrlEl.addEventListener('click', redirectUrl)
+	newUrlEl.addEventListener('click', askUrl);
+	redirectUrlEl.addEventListener('click', redirectUrl)
 
 </script>
 </body>
