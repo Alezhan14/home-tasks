@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<style>
+	.container {
+		max-width: 600px;
+		margin: 0 auto;
+		font-size: 30px;
+	}
+
+	button {
+		margin: 0 30px;
+		padding: 5px 10px;
+		cursor: pointer;
+	}
+
+	input {
+		width: 200px;
+		height: 20px;
+	}
+</style>
+<body>
+<div class="container">
+	<ul class="to-do-list">
+		<li>Завдання 1 <button class="delete-button">Видалити</button></li>
+	</ul>
+
+	<div class="input-holder">
+		<input type="text"><button class="add-button">Додати</button>
+	</div>
+
+</div>
+<script>
+	let toDoListEl = document.querySelector('.to-do-list');
+	let addButtonEl = document.querySelector('.add-button');
+
+	let addRemoveToDo = function (event) {
+		let inputEl = document.querySelector('input');
+		let toDoItemEl = document.createElement('li');
+		let deleteButtonEl = document.createElement('button');
+		let targetClass = event.target.getAttribute('class');
+
+		if(targetClass === 'add-button') {
+			deleteButtonEl.innerText = 'Видалити';
+			deleteButtonEl.setAttribute('class', 'delete-button')
+			toDoListEl.appendChild(toDoItemEl);
+			toDoItemEl.innerText = inputEl.value;
+			toDoItemEl.appendChild(deleteButtonEl);
+			inputEl.value = '';
+		} else if(targetClass === 'delete-button') {
+			let targetParentEl = event.target.parentElement;
+			targetParentEl.remove();
+		}
+	}
+
+	// let addRemoveToDo = function(event) {
+	// 	let inputEl = document.querySelector('input');
+	// 	let targetClass = event.target.getAttribute('class');
+	// 	let toDoText = inputEl.value;
+	// 	let toDoItemEl = document.createElement('li');
+	// 	let toDoItemTextEl = `${toDoText} <button class="delete-button">Видалити</button>`;
+	//
+	// 	if(targetClass === 'add-button') {
+	// 		toDoListEl.appendChild(toDoItemEl);
+	// 		toDoItemEl.innerHTML = toDoItemTextEl;
+	// 		inputEl.value = '';
+	// 	} else if(targetClass === 'delete-button') {
+	// 		let targetParentEl = event.target.parentElement;
+	// 		targetParentEl.remove();
+	// 	}
+	// }
+
+
+	addButtonEl.addEventListener('click', addRemoveToDo);
+	toDoListEl.addEventListener('click', addRemoveToDo);
+
+</script>
+</body>
+</html>
