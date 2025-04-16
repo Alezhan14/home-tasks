@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<style>
+	.container {
+		max-width: 600px;
+		margin: 0 auto;
+		font-size: 30px;
+	}
+	.container.active {
+		color: green;
+	}
+
+	button {
+		margin: 0 30px;
+		padding: 5px 10px;
+		cursor: pointer;
+	}
+</style>
+<body>
+<div class="container">
+	<button class="new-url">Enter new url</button>
+	<button class="redirect-url">Go to new url</button>
+</div>
+<script>
+	let newUrlEl = document.querySelector('.new-url');
+    let redirectUrlEl = document.querySelector('.redirect-url');
+    let newUrl;
+
+	let askUrl = function() {
+        newUrl = prompt('enter new url');
+	}
+
+    let redirectUrl = function() {
+        if(newUrl) {
+            window.location.href = newUrl;
+		} else {
+            alert("url wasn't entered")
+		}
+	}
+
+    newUrlEl.addEventListener('click', askUrl);
+    redirectUrlEl.addEventListener('click', redirectUrl)
+
+</script>
+</body>
+</html>
