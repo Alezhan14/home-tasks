@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<style>
+	.container {
+		max-width: 600px;
+		margin: 0 auto;
+	}
+
+	input, textarea {
+		display: block;
+		width: 100%;
+		padding: 10px;
+		margin-bottom: 15px;
+	}
+
+	input+p, textarea+p {
+		display: none;
+		color: #ff0000;
+		margin: 0  0 20px;
+	}
+
+	.not-valid+p {
+		display: block;
+	}
+</style>
+<body>
+<div class="container">
+	<form action="#">
+		<h2>We would like to help you</h2>
+		<input type="text" name="name" id="name" placeholder="Name">
+		<p>The name must not be empty or consist only of numbers.</p>
+		<textarea name="message" id="message" placeholder="Message" cols="30" rows="10"></textarea>
+		<p>Massage must be more than 5 or more characters</p>
+		<h3>How to answer you?</h3>
+		<input type="tel" name="phone" id="phone" placeholder="Phone">
+		<p>Phone must start with +380 and contain 13 characters.</p>
+		<input type="email" name="email" id="email" placeholder="Email">
+		<p>Email must contain @ and .</p>
+		<input type="submit" id="button" value="Send Request">
+	</form>
+</div>
+<script>
+	let formEl = document.querySelector('form');
+	let nameEL = document.querySelector('input#name');
+	let messageEL = document.querySelector('textarea#message');
+	let phoneEL = document.querySelector('input#phone');
+	let emailEL = document.querySelector('input#email');
+	let user = {}
+	const phoneRegex = /^\+380\d{9}$/;
+	const emailRegex = /^[^@]+@[^@]+\.[^@]+$/;
+
+	function addClass() {
+		this.classList.add('not-valid');
+	}
+
+	function removeClass() {
+		this.classList.remove('not-valid');
+	}
+
+	function checkRegex(regex, input) {
+		return regex.test(input);
+	}
+
+	function validNameEL() {
+		if (!nameEL.value.trim() || Number(nameEL.value)) {
+			addClass.call(nameEL);
+		} else {
+			removeClass.call(nameEL);
+			user.name = nameEL.value;
+			return true;
+		}
+	}
+
+	function validMessageEL() {
+		if (messageEL.value.length < 5) {
+			addClass.call(messageEL);
+		} else {
+			removeClass.call(messageEL);
+			user.message = messageEL.value;
+			return true;
+		}
+	}
+
+	function validPhone() {
+		let flagRegex = checkRegex(phoneRegex, phoneEL.value);
+		if (!flagRegex) {
+			addClass.call(phoneEL);
+		} else {
+			removeClass.call(phoneEL);
+			user.phone = phoneEL.value;
+			return true;
+		}
+	}
+
+	function validEmail() {
+		let flagRegex = checkRegex(emailRegex, emailEL.value);
+		if (!flagRegex) {
+			addClass.call(emailEL);
+		} else {
+			removeClass.call(emailEL);
+			user.email = emailEL.value;
+			return true;
+		}
+	}
+
+	formEl.addEventListener('submit', function(event) {
+		event.preventDefault();
+		validNameEL();
+		validMessageEL();
+		validPhone();
+		validEmail();
+
+		if(validNameEL() & validMessageEL() & validPhone() & validEmail()) {
+			console.log(user)
+		}
+	});
+</script>
+</body>
+</html>
+
+
