@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<style>
+	* {
+		box-sizing: border-box;
+	}
+
+	.btn {
+		padding: 0;
+		margin: 0;
+		cursor: pointer;
+		background-color: lightblue;
+		line-height: 50px;
+		text-align: center;
+		width: 50px;
+		height: 50px;
+		border-radius: 100%;
+		position: absolute;
+	}
+
+	.next, .prev {
+		top: 50%;
+		transform: translateY(-50%);
+	}
+
+	.prev {
+		left: -60px;
+	}
+
+	.next {
+		right: -60px;
+	}
+
+	.container {
+		max-width: 600px;
+		margin: 0 auto;
+	}
+
+	.slider-holder {
+		position: relative;
+	}
+
+	.slide img {
+		width: 100%;
+		display:none;
+	}
+
+	.slide.active img {
+		display: block;
+	}
+
+	.slide {
+		transition: all 1s ease;
+		opacity: 0;
+	}
+
+	.slide.active {
+		opacity: 1;
+	}
+
+	.pagination {
+		margin: 0;
+		padding: 0;
+		display: flex;
+		gap: 0 15px;
+		flex-direction: row;
+		position: absolute;
+		bottom: -30px;
+		left: 50%;
+		transform: translateX(-50%);
+		list-style: none;
+	}
+
+	.pagination .active {
+		background-color: red;
+		cursor: auto;
+	}
+
+	li {
+		width: 10px;
+		height: 10px;
+		background-color: lightblue;
+		border-radius: 5px;
+		cursor: pointer;
+
+	}
+</style>
+<body>
+<div class="container">
+	<div class="slider-holder">
+		<a class="btn prev">prev</a>
+		<div class="slider">
+			<div class="slide active"><img src="1.jpg" alt=""></div>
+			<div class="slide"><img src="2.jpg" alt=""></div>
+			<div class="slide"><img src="3.jpg" alt=""></div>
+			<div class="slide"><img src="4.jpg" alt=""></div>
+			<div class="slide"><img src="5.jpg" alt=""></div>
+			<div class="slide"><img src="6.jpg" alt=""></div>
+			<div class="slide"><img src="7.jpg" alt=""></div>
+		</div>
+		<a class="btn next">next</a>
+		<ul class="pagination"></ul>
+	</div>
+</div>
+<script>
+	let slidesEl = document.querySelectorAll('.slide');
+	let prevButtonEl = document.querySelector('.prev');
+	let nextButtonEl = document.querySelector('.next');
+	let paginationEL = document.querySelector('.pagination');
+	let SlidesArr = Array.from(slidesEl);
+	let currentSlideIndex = 0;
+	let paginationDots = pagination();
+	let paginationIndex;
+
+	if(currentSlideIndex === 0) {
+		prevButtonEl.style.display = 'none';
+	}
+
+	function getCurrentSlideIndex() {
+		currentSlideIndex = SlidesArr.findIndex(slide => slide.classList.contains('active'));
+	}
+
+	function addActive(node, index) {
+		node[index].classList.add('active');
+	}
+
+	function removeActive(node, index) {
+		node[index].classList.remove('active');
+	}
+
+	function pagination() {
+
+		for(let i = 0; i < SlidesArr.length; i++) {
+			let liEl = document.createElement('li');
+			paginationEL.appendChild(liEl);
+		}
+
+		let paginationItemsEl = document.querySelectorAll('li');
+		let paginationArr = Array.from(paginationItemsEl);
+
+		paginationItemsEl[currentSlideIndex].classList.add('active');
+
+		paginationItemsEl.forEach(elem => {
+			elem.addEventListener('click', function(event){
+				paginationItemsEl.forEach(elem => {
+					elem.classList.remove('active');
+				});
+
+				slidesEl.forEach(elem => {
+					elem.classList.remove('active');
+				});
+
+				elem.classList.add('active');
+
+				paginationIndex = paginationArr.findIndex(slide => slide.classList.contains('active'));
+
+				addActive(slidesEl, paginationIndex);
+
+				getCurrentSlideIndex();
+
+				if(currentSlideIndex === slidesEl.length - 1) {
+					nextButtonEl.style.display = 'none';
+					prevButtonEl.style.display = 'block';
+				} else if(currentSlideIndex === 0) {
+					prevButtonEl.style.display = 'none';
+					nextButtonEl.style.display = 'block';
+				} else if(currentSlideIndex > 0 && currentSlideIndex < slidesEl.length) {
+					prevButtonEl.style.display = 'block';
+					nextButtonEl.style.display = 'block';
+				}
+			});
+		});
+
+		return paginationItemsEl;
+	}
+
+	prevButtonEl.addEventListener('click', function(event) {
+		getCurrentSlideIndex();
+
+		if(currentSlideIndex > 0) {
+			removeActive(slidesEl, currentSlideIndex);
+			addActive(slidesEl, currentSlideIndex - 1);
+		}
+
+		currentSlideIndex--;
+
+		if(currentSlideIndex === 0) {
+			prevButtonEl.style.display = 'none';
+		}
+
+		if(currentSlideIndex < slidesEl.length) {
+			nextButtonEl.style.display = 'block';
+		}
+
+		paginationDots.forEach(elem => {
+			elem.classList.remove('active');
+		});
+
+		addActive(paginationDots, currentSlideIndex);
+
+	});
+
+	nextButtonEl.addEventListener('click', function(event) {
+		getCurrentSlideIndex();
+
+		if(currentSlideIndex < slidesEl.length - 1) {
+			removeActive(slidesEl, currentSlideIndex);
+			addActive(slidesEl, currentSlideIndex + 1);
+		}
+
+		currentSlideIndex++;
+
+		if(currentSlideIndex === slidesEl.length - 1) {
+			nextButtonEl.style.display = 'none';
+		}
+
+		if(currentSlideIndex > 0) {
+			prevButtonEl.style.display = 'block';
+		}
+
+		paginationDots.forEach(elem => {
+			elem.classList.remove('active');
+		});
+
+		addActive(paginationDots, currentSlideIndex);
+	});
+</script>
+</body>
+</html>
+
+
