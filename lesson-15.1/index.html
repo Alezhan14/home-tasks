@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<style>
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+
+	body {
+		line-height: 1.2;
+		font-size: 18px;
+		background-color: #66deb2;
+	}
+
+	h1, h2 {
+		text-align: center;
+		margin-bottom: 15px;
+	}
+
+	.container {
+		width: 100%;
+		margin: 0 auto;
+		max-width: 75%;
+	}
+
+	.form {
+		background: #fff;
+		padding: 10px;
+		margin-top: 25px;
+		margin-bottom: 25px;
+		display: flex;
+		justify-content: center;
+	}
+
+	.form__input {
+		min-height: 25px;
+		padding: 10px;
+		width: 100%;
+		border: 1px solid;
+	}
+
+	.form__btn {
+		background: #0be69d;
+		border: none;
+		cursor: pointer;
+		width: 100px;
+	}
+
+	.todo-item {
+		display: flex;
+		padding: 10px;
+		background: #fff;
+		border-radius: 10px;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 10px;
+	}
+	.todo-item--checked {
+		text-decoration: line-through;
+	}
+	.todo-item__description {
+		flex-grow: 1;
+		padding-left: 10px;
+	}
+	.todo-item__delete {
+		background: #0be69d;
+		border: none;
+		cursor: pointer;
+		width: 95px;
+		padding: 10px;
+	}
+	input[checked] + span {
+		text-decoration: line-through;
+	}
+</style>
+<body>
+<div class="container">
+	<h1>ToDoList</h1>
+	<form class="form js--form">
+		<input type="text" name="value" required class="form__input js--form__input">
+		<button class="form__btn">Додати</button>
+	</form>
+	<ul class="js--todos-wrapper">
+
+	</ul>
+</div>
+<script>
+	// получить уєльку +
+	// получитть форму +
+	// повесить собитие на сабмин
+	//   получить инпут
+	//   на сабмин создавать лижку в уєльке с текстом инпут и кнопкой удалить
+	//   в каждой лижке получить чекбокс, если чекед повесить на лижку linethrough.  ????
+	// создать функцию удалить лижку и повесит ивент на кнопку удалить
+
+	let formEl = document.querySelector('.js--form');
+	let toDoList = document.querySelector('.js--todos-wrapper');
+	let toDo = JSON.parse(localStorage.getItem('toDo')) || [];
+	let isChecked = false;
+
+	showToDoList();
+
+	let checkboxEl = document.querySelectorAll('input[type="checkbox"]');
+
+	function showToDoList() {
+		for(let i = 0; i < toDo.length; i++) {
+			let liChecked = toDo[i].isChecked;
+
+			createItem(toDo[i].toDoText,liChecked)
+		}
+
+	}
+
+	function getCurrentToDo(event) {
+		return event.target.parentElement.querySelector('.todo-item__description').innerText;
+	}
+
+	function removeToDo(event) {
+		let targetParentEl = event.target.parentElement;
+
+		toDo = toDo.filter((element) => {
+			if(element.toDoText !== getCurrentToDo(event)) {
+				return element.toDoText;
+			}
+		});
+
+		targetParentEl.remove();
+
+		localStorage.setItem('toDo', JSON.stringify(toDo));
+	}
+
+	function createItem(text, isChecked) {
+		let liEl = document.createElement('li');
+
+		liEl.innerHTML = `<input type="checkbox"><span class="todo-item__description">${text}</span><button onclick="removeToDo(event)" class="todo-item__delete">Видалити</button>`;
+		toDoList.appendChild(liEl).setAttribute('class', 'todo-item');
+
+		if(isChecked) {
+			liEl.children[0].checked = true;
+			liEl.style.textDecoration = 'line-through';
+		}
+	}
+
+	formEl.addEventListener('submit', function(event) {
+		let toDoText = document.querySelector('.js--form__input').value;
+
+		createItem(toDoText);
+		toDo.push({toDoText, isChecked});
+
+		localStorage.setItem('toDo', JSON.stringify(toDo));
+	})
+
+	checkboxEl.forEach((element) => {
+		element.addEventListener('change', function(event) {
+			toDo.find((element) => {
+				if(element.toDoText === getCurrentToDo(event)) {
+					element.isChecked = event.target.checked;
+				}
+			});
+
+			let targetParentEl = event.target.parentElement;
+			targetParentEl.style.textDecoration = event.target.checked ? 'line-through' : 'none';
+
+			localStorage.setItem('toDo', JSON.stringify(toDo));
+		})
+	});
+</script>
+</body>
+</html>
+
+
