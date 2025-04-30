@@ -28,7 +28,7 @@
 			let today = new Date();
 			let birthDate = new Date(this.birthDay)
 			let age = today.getFullYear() - birthDate.getFullYear();
-			console.log((birthDate.getMonth() > today.getMonth()) ? age - 1 : age );
+			console.log((birthDate.getMonth() > today.getMonth()) ? age : age - 1 );
 		};
 		this.averageScore = function() {
 			let sum = this.grade.reduce((element, accumulator) => element + accumulator);
@@ -61,7 +61,7 @@
 	student1.summary()
 
 
-	let student2 = new Student('Mykola', 'Petrov', '1970-01-05', [80, 120, 150]);
+	let student2 = new Student('Mykola', 'Petrov', '1970-05-02', [80, 91, 100]);
 	console.log(student2.fName)
 	console.log(student2.lName)
 	student2.getAge()
@@ -74,7 +74,7 @@
 	student2.summary()
 
 
-	let student3 = new Student('Jason', 'Statham', '1987-03-06', [200, 130, 100]);
+	let student3 = new Student('Jason', 'Statham', '1987-03-06', [100, 100, 100]);
 	console.log(student3.fName)
 	console.log(student3.lName)
 	student3.getAge()
