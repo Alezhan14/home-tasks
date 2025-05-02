@@ -14,38 +14,42 @@
 		this.birthDay = birthDay;
 		this.grade = grade;
 		this.visit = [];
-		this.present = function() {
-			if (this.visit.length < 25) {
-				this.visit.push(true);
-			}
-		};
-		this.absent = function() {
-			if (this.visit.length < 25) {
-				this.visit.push(false);
-			}
-		};
-		this.getAge = function() {
-			let today = new Date();
-			let birthDate = new Date(this.birthDay)
-			let age = today.getFullYear() - birthDate.getFullYear();
-			console.log((birthDate.getMonth() > today.getMonth()) ? age : age - 1 );
-		};
-		this.averageScore = function() {
-			let sum = this.grade.reduce((element, accumulator) => element + accumulator);
-			return sum / this.grade.length;
-		};
-		this.summary = function() {
-			let count = 0;
-			this.visit.forEach(element => {
-				if (element === true) {
-					count++;
-				}
-			});
-			let averageAttendance = count / this.visit.length;
-			let message = (this.averageScore() > 90 && averageAttendance > 0.9) ? 'Молодець!' : (this.averageScore() > 90 || averageAttendance > 0.9) ? "Добре, але можна краще" : "Редиска!";
-			console.log(message);
+	}
 
+	Student.prototype.present = function() {
+		if (this.visit.length < 25) {
+			this.visit.push(true);
 		}
+	}
+
+	Student.prototype.absent = function() {
+		if (this.visit.length < 25) {
+			this.visit.push(false);
+		}
+	}
+
+	Student.prototype.getAge = function() {
+		let today = new Date();
+		let birthDate = new Date(this.birthDay)
+		let age = today.getFullYear() - birthDate.getFullYear();
+		console.log((birthDate.getMonth() > today.getMonth()) ? age : age - 1 );
+	}
+
+	Student.prototype.averageScore = function() {
+		let sum = this.grade.reduce((element, accumulator) => element + accumulator);
+		return sum / this.grade.length;
+	}
+
+	Student.prototype.summary = function() {
+		let count = 0;
+		this.visit.forEach(element => {
+			if (element === true) {
+				count++;
+			}
+		});
+		let averageAttendance = count / this.visit.length;
+		let message = (this.averageScore() > 90 && averageAttendance > 0.9) ? 'Молодець!' : (this.averageScore() > 90 || averageAttendance > 0.9) ? "Добре, але можна краще" : "Редиска!";
+		console.log(message);
 	}
 
 	let student1 = new Student('Ivan', 'Ivanov', '1991-09-08', [67, 43, 80]);
