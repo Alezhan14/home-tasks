@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<style></style>
+<body>
+<div class="container"></div>
+<script>
+	class Coach{
+		constructor(name, specialization, rating) {
+			this.name = name;
+			this.specialization = specialization;
+			this.rating = rating;
+		}
+
+		displayInfo(name, specialization, rating) {
+			console.log(`Coach: ${this.name}, Specialization: ${this.specialization}, Rating ${this.rating}`)
+		}
+	}
+
+	let coach1 = new Coach('Petter', 'Football', 100);
+	coach1.displayInfo();
+</script>
+</body>
+</html>
+
+

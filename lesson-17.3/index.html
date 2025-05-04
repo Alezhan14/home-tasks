@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<style></style>
+<body>
+<div class="container"></div>
+<script>
+	class BankAccount {
+		#balance;
+
+		constructor(balance) {
+			this.#balance = balance;
+		}
+
+		getBalance() {
+			return this.#balance;
+		}
+
+		deposit(count) {
+			return this.#balance += count;
+		}
+
+		withdraw(count) {
+			return this.#balance -= count;
+		}
+	}
+
+	const account1 = new BankAccount(1000);
+
+	console.log(account1.getBalance());
+	account1.deposit(500);
+	console.log(account1.getBalance());
+	account1.withdraw(200);
+	console.log(account1.getBalance());
+
+</script>
+</body>
+</html>
+
+
