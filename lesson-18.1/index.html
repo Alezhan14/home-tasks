@@ -111,14 +111,19 @@
 						this.seconds--;
 					}
 					this.showTime()
-				}, 1000)
+				}, 1000);
+
+				this.buttonStart.disabled = true;
 			});
 		}
 
 		stopTimer() {
 			this.buttonStop.addEventListener('click', (event) => {
 				clearInterval(this.intervalID);
+
+				this.buttonStart.disabled = false;
 			});
+
 		}
 	}
 
