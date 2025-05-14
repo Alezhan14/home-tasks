@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<style>
+	body {
+		background-color: #F5F5F5;
+		font-family: 'Roboto', sans-serif;
+		font-size: 16px;
+		line-height: 120%;
+	}
+
+	.container {
+		max-width: 600px;
+		margin: 0 auto;
+		height: 100vh;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.widget-holder {
+		width: 350px;
+		background-color: #0b3ab1;
+		padding: 30px 20px;
+		border-radius: 10px;
+		color: #fff;
+		text-transform: capitalize;
+	}
+
+	.widget {
+		display: flex;
+		gap: 0 10px;
+	}
+
+	.left-side {
+		width: 60%;
+	}
+
+	.right-side {
+		text-align: center;
+		width: 40%;
+	}
+
+	.item {
+		margin-bottom: 10px;
+	}
+
+	button {
+		padding: 5px 10px;
+		cursor: pointer;
+		font-size: 16px;
+		color: #2C3E50;
+		border-radius: 10px;
+		background-color: #E0E0E0;
+	}
+
+	.btn-holder {
+		float: right;
+	}
+
+	.date {
+		font-size: 22px;
+		line-height: 120%;
+	}
+
+	.city {
+		font-size: 35px;
+		line-height: 120%;
+	}
+
+	.icon {
+		margin: 0;
+	}
+	.temperature {
+		font-size: 30px;
+	}
+</style>
+<body>
+<div class="container">
+	<div class="widget-holder">
+		<div class="widget">
+		</div>
+		<div class="btn-holder">
+			<button class="button-update">Update weather</button>
+		</div>
+	</div>
+</div>
+<script>
+	class WeatherWidget {
+		constructor(widget, btn) {
+			this.widget = document.querySelector(widget);
+			this.btn = document.querySelector(btn);
+			this.btn.addEventListener('click', this.updateWeather.bind(this));
+		}
+
+		async updateWeather() {
+			let dateArr = new Date().toString().split(' ');
+			let timeArr = dateArr[4].split(':');
+
+			try {
+				const response = await fetch('https://api.openweathermap.org/data/2.5/weather?q=kharkiv&appid=43b334308aee6e91962db0fb678d1f0b&units=metric');
+				const data = await response.json();
+				this.widget.innerHTML = `
+					<div class="left-side">
+						<div class="date item">${dateArr[1]} ${dateArr[2]}, ${dateArr[3]} - ${dateArr[0]}</div>
+						<div class="city item">${data.name}</div>
+						<div class="time item">time</div>
+						<div class="humidity item">Humidity: ${data.main.humidity}%</div>
+						<div class="pressure item">Pressure: ${data.main.pressure} hPa</div>
+						<div class="wind item">Wind: ${Math.round(data.wind.speed)} km/h</div>
+					</div>
+					<div class="right-side">
+						<div class="icon item"><img src="https://openweathermap.org/img/wn/${data.weather[0].icon}.png"></div>
+						<div class="temperature item">${Math.round(data.main.temp)}<sup>o<sup/></div>
+						<div class="feels-like item">Feels-like: ${Math.round(data.main.feels_like)}<sup>o<sup/></div>
+						<div class="clouds item">${data.weather[0].description}</div>
+						<div class="last-update item">last-update:<br> ${dateArr[1]} ${dateArr[2]}, ${timeArr[0]}:${timeArr[1]}</div>
+					</div>
+				`;
+			} catch (error) {
+				console.log(error);
+			}
+
+			let time = this.widget.querySelector('.time');
+
+			setInterval(() => {
+				dateArr = new Date().toString().split(' ');
+				timeArr = dateArr[4].split(':');
+				time.innerHTML = `time: ${timeArr[0]}:${timeArr[1]}:${timeArr[2]}`;
+			}, 1000)
+		}
+	}
+
+	let newWidget = new WeatherWidget('.widget', '.button-update');
+	newWidget.updateWeather()
+
+</script>
+</body>
+</html>
+
+
