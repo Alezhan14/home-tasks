@@ -1,0 +1,21 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dist": "sass scss/main.scss dist/main.css",
+    "watch": "sass --watch scss/main.scss dist/main.css"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.3.6",
+    "jquery": "^3.7.1",
+    "sass": "^1.89.0"
+  },
+  "devDependencies": {
+    "gulp": "^5.0.0"
+  }
+}
