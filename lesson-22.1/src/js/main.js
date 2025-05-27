@@ -1,73 +1,76 @@
-import "../scss/main.scss";
+import "../scss/main.scss"
 
-let formEl = document.querySelector('.js--form');
-let toDoList = document.querySelector('.js--todos-wrapper');
-let toDo = JSON.parse(localStorage.getItem('toDo')) || [];
-let isChecked = false;
-
-showToDoList();
-
-let checkboxEl = document.querySelectorAll('input[type="checkbox"]');
-
-function showToDoList() {
-    for(let i = 0; i < toDo.length; i++) {
-        let liChecked = toDo[i].isChecked;
-
-        createItem(toDo[i].toDoText,liChecked)
+class Timer {
+    constructor(timer, buttonStart, buttonStop, buttonSet) {
+        this.element = document.querySelector(timer);
+        this.buttonStart = document.querySelector(buttonStart);
+        this.buttonStop = document.querySelector(buttonStop);
+        this.buttonSet = document.querySelector(buttonSet);
+        this.minutes = 0;
+        this.seconds = 0;
+        this.intervalID = null;
     }
 
-}
-
-function getCurrentToDo(event) {
-    return event.target.parentElement.querySelector('.todo-item__description').innerText;
-}
-
-function removeToDo(event) {
-    let targetParentEl = event.target.parentElement;
-
-    toDo = toDo.filter((element) => {
-        if(element.toDoText !== getCurrentToDo(event)) {
-            return element.toDoText;
-        }
-    });
-
-    targetParentEl.remove();
-
-    localStorage.setItem('toDo', JSON.stringify(toDo));
-}
-
-function createItem(text, isChecked) {
-    let liEl = document.createElement('li');
-
-    liEl.innerHTML = `<input type="checkbox"><span class="todo-item__description">${text}</span><button onclick="removeToDo(event)" class="todo-item__delete">Видалити</button>`;
-    toDoList.appendChild(liEl).setAttribute('class', 'todo-item');
-
-    if(isChecked) {
-        liEl.children[0].checked = true;
-        liEl.style.textDecoration = 'line-through';
+    askTime() {
+        this.time = prompt ('Enter time in format: 23:45');
+        this.minutes = this.time.split(':')[0];
+        this.seconds = this.time.split(':')[1];
     }
-}
 
-formEl.addEventListener('submit', function(event) {
-    let toDoText = document.querySelector('.js--form__input').value;
+    validation() {
+        return !(this.minutes == 0 && this.seconds == 0 ||
+            this.minutes < 0 || this.minutes >= 59 ||
+            this.seconds < 0 || this.seconds > 59 ||
+            typeof this.minutes === 'undefined' || typeof this.seconds == 'undefined');
+    }
 
-    createItem(toDoText);
-    toDo.push({toDoText, isChecked});
+    showTime() {
+        this.element.textContent = `${String(this.minutes).padStart(2, '0')}:${String(this.seconds).padStart(2, '0')}`;
 
-    localStorage.setItem('toDo', JSON.stringify(toDo));
-})
+    }
 
-checkboxEl.forEach((element) => {
-    element.addEventListener('change', function(event) {
-        toDo.find((element) => {
-            if(element.toDoText === getCurrentToDo(event)) {
-                element.isChecked = event.target.checked;
+    setTime() {
+        this.buttonSet.addEventListener('click', (event) => {
+            clearInterval(this.intervalID);
+            this.askTime();
+
+            if (this.validation()) {
+                this.showTime();
+                this.startTimer();
+            } else {
+                alert('Wrong time format!');
             }
         });
+    }
 
-        let targetParentEl = event.target.parentElement;
-        targetParentEl.style.textDecoration = event.target.checked ? 'line-through' : 'none';
+    startTimer() {
+        this.buttonStart.addEventListener('click', (event) => {
+            this.intervalID = setInterval(() => {
+                if(this.seconds === 0 && this.minutes === 0) {
+                    clearInterval(this.intervalID);
+                } else if(this.seconds === 0) {
+                    this.seconds = 59;
+                    this.minutes--;
+                } else if(this.seconds > 0) {
+                    this.seconds--;
+                }
+                this.showTime()
+            }, 1000);
 
-        localStorage.setItem('toDo', JSON.stringify(toDo));
-    })
-});
+            this.buttonStart.disabled = true;
+        });
+    }
+
+    stopTimer() {
+        this.buttonStop.addEventListener('click', (event) => {
+            clearInterval(this.intervalID);
+
+            this.buttonStart.disabled = false;
+        });
+
+    }
+}
+
+let myTimer = new Timer('.timer', '.button-start', '.button-stop', '.button-set')
+myTimer.setTime();
+myTimer.stopTimer();
