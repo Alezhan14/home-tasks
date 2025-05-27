@@ -29,95 +29,138 @@
 </style>
 <body>
 <div class="container">
-	<form action="#">
+	<form class="form" action="#">
 		<h2>We would like to help you</h2>
-		<input type="text" name="name" id="name" placeholder="Name">
+		<input type="text" name="name" id="name" data-required placeholder="Name">
 		<p>The name must not be empty or consist only of numbers.</p>
-		<textarea name="message" id="message" placeholder="Message" cols="30" rows="10"></textarea>
+		<textarea name="message" id="message" data-required placeholder="Message" cols="30" rows="10"></textarea>
 		<p>Massage must be more than 5 or more characters</p>
 		<h3>How to answer you?</h3>
 		<input type="tel" name="phone" id="phone" placeholder="Phone">
 		<p>Phone must start with +380 and contain 13 characters.</p>
 		<input type="email" name="email" id="email" placeholder="Email">
 		<p>Email must contain @ and .</p>
-		<input type="submit" id="button" value="Send Request">
+		<button>Push</button>
 	</form>
 </div>
 <script>
-	let formEl = document.querySelector('form');
-	let nameEL = document.querySelector('input#name');
-	let messageEL = document.querySelector('textarea#message');
-	let phoneEL = document.querySelector('input#phone');
-	let emailEL = document.querySelector('input#email');
-	let user = {}
-	const phoneRegex = /^\+380\d{9}$/;
-	const emailRegex = /^[^@]+@[^@]+\.[^@]+$/;
+	// let formEl = document.querySelector('form');
+	// let nameEL = document.querySelector('input#name');
+	// let messageEL = document.querySelector('textarea#message');
+	// let phoneEL = document.querySelector('input#phone');
+	// let emailEL = document.querySelector('input#email');
+	// let user = {}
+	// const phoneRegex = /^\+380\d{9}$/;
+	// const emailRegex = /^[^@]+@[^@]+\.[^@]+$/;
+	//
+	// function addClass() {
+	// 	this.classList.add('not-valid');
+	// }
+	//
+	// function removeClass() {
+	// 	this.classList.remove('not-valid');
+	// }
+	//
+	// function checkRegex(regex, input) {
+	// 	return regex.test(input);
+	// }
+	//
+	// function validNameEL() {
+	// 	if (!nameEL.value.trim() || Number(nameEL.value)) {
+	// 		addClass.call(nameEL);
+	// 	} else {
+	// 		removeClass.call(nameEL);
+	// 		user.name = nameEL.value;
+	// 		return true;
+	// 	}
+	// }
+	//
+	// function validMessageEL() {
+	// 	if (messageEL.value.length < 5) {
+	// 		addClass.call(messageEL);
+	// 	} else {
+	// 		removeClass.call(messageEL);
+	// 		user.message = messageEL.value;
+	// 		return true;
+	// 	}
+	// }
+	//
+	// function validPhone() {
+	// 	let flagRegex = checkRegex(phoneRegex, phoneEL.value);
+	// 	if (!flagRegex) {
+	// 		addClass.call(phoneEL);
+	// 	} else {
+	// 		removeClass.call(phoneEL);
+	// 		user.phone = phoneEL.value;
+	// 		return true;
+	// 	}
+	// }
+	//
+	// function validEmail() {
+	// 	let flagRegex = checkRegex(emailRegex, emailEL.value);
+	// 	if (!flagRegex) {
+	// 		addClass.call(emailEL);
+	// 	} else {
+	// 		removeClass.call(emailEL);
+	// 		user.email = emailEL.value;
+	// 		return true;
+	// 	}
+	// }
+	//
+	// formEl.addEventListener('submit', function(event) {
+	// 	event.preventDefault();
+	// 	validNameEL();
+	// 	validMessageEL();
+	// 	validPhone();
+	// 	validEmail();
+	//
+	// 	if(validNameEL() & validMessageEL() & validPhone() & validEmail()) {
+	// 		console.log(user)
+	// 	}
+	// });
 
-	function addClass() {
-		this.classList.add('not-valid');
-	}
+	// - fids validator
+	// - form constructor validator
 
-	function removeClass() {
-		this.classList.remove('not-valid');
-	}
+	class FieldValidator {
+		constructor(field) {
+			this.field = field;
+		}
 
-	function checkRegex(regex, input) {
-		return regex.test(input);
-	}
+		validate() {
+			let value = this.field.value.trim();
+			console.log(value);
 
-	function validNameEL() {
-		if (!nameEL.value.trim() || Number(nameEL.value)) {
-			addClass.call(nameEL);
-		} else {
-			removeClass.call(nameEL);
-			user.name = nameEL.value;
-			return true;
+			if(this.field.hasAttribute('data-required') && value === '') {
+				console.log('errors');
+			}
 		}
 	}
 
-	function validMessageEL() {
-		if (messageEL.value.length < 5) {
-			addClass.call(messageEL);
-		} else {
-			removeClass.call(messageEL);
-			user.message = messageEL.value;
-			return true;
+	class FormValidator {
+		constructor(form) {
+			this.form = form;
+			this.form.addEventListener('submit', this.handleSubmit.bind(this));
+		}
+
+		getInputs() {
+			let inputs = this.form.querySelectorAll('input[data-required], textarea[data-required]');
+			inputs.forEach(input => {
+				let fieldValidator = new FieldValidator(input);
+				fieldValidator.validate();
+			});
+		}
+		handleSubmit(event) {
+			event.preventDefault();
+			this.getInputs();
 		}
 	}
 
-	function validPhone() {
-		let flagRegex = checkRegex(phoneRegex, phoneEL.value);
-		if (!flagRegex) {
-			addClass.call(phoneEL);
-		} else {
-			removeClass.call(phoneEL);
-			user.phone = phoneEL.value;
-			return true;
-		}
-	}
+	let forms = document.querySelectorAll('.form');
 
-	function validEmail() {
-		let flagRegex = checkRegex(emailRegex, emailEL.value);
-		if (!flagRegex) {
-			addClass.call(emailEL);
-		} else {
-			removeClass.call(emailEL);
-			user.email = emailEL.value;
-			return true;
-		}
-	}
-
-	formEl.addEventListener('submit', function(event) {
-		event.preventDefault();
-		validNameEL();
-		validMessageEL();
-		validPhone();
-		validEmail();
-
-		if(validNameEL() & validMessageEL() & validPhone() & validEmail()) {
-			console.log(user)
-		}
-	});
+	forms.forEach(form => {
+		let validator = new FormValidator(form);
+	})
 </script>
 </body>
 </html>

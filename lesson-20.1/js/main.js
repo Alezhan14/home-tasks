@@ -1,5 +1,5 @@
-let $formEl = $('.js--form');
-let $toDoList = $('.js--todos-wrapper');
+let $formEl = $('.src--form');
+let $toDoList = $('.src--todos-wrapper');
 let toDo = JSON.parse(localStorage.getItem('toDo')) || [];
 let isChecked = false;
 
@@ -62,7 +62,7 @@ function createItem(text, isChecked) {
 
 $formEl.on('submit', function(event) {
     event.preventDefault();
-    let toDoText = $('.js--form__input').val();
+    let toDoText = $('.src--form__input').val();
     createItem(toDoText);
     toDo.push({ toDoText, isChecked });
 
