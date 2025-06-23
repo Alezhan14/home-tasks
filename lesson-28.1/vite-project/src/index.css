@@ -24,11 +24,10 @@ a:hover {
 
 body {
   margin: 0;
-  /*display: flex;*/
+  display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #66deb2;
 }
 
 h1 {
@@ -68,71 +67,18 @@ button:focus-visible {
   }
 }
 
-.container {
+#root {
   width: 100%;
-  margin: 0 auto;
-  padding: 50px 0;
 }
 
-.form {
-  background: #fff;
-  padding: 10px;
-  margin-top: 25px;
-  margin-bottom: 25px;
+li {
+  text-align: left;
+}
+
+input {width: 100%;}
+
+.list-group-item {
   display: flex;
-  justify-content: center;
-}
-
-.form__input {
-  min-height: 25px;
-  padding: 10px;
-  width: 100%;
-  border: 1px solid;
-}
-
-.form__btn {
-  background: #0be69d;
-  border: none;
-  cursor: pointer;
-  width: 100px;
-}
-
-.todo-item {
-  display: flex;
-  padding: 10px;
-  background: #fff;
-  border-radius: 10px;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
-}
-.todo-item--checked {
-  text-decoration: line-through;
-}
-.todo-item__description {
-  flex-grow: 1;
-  padding-left: 10px;
-}
-.todo-item__delete {
-  background: #0be69d;
-  border: none;
-  cursor: pointer;
-  width: 95px;
-  padding: 10px;
-}
-input[checked] + span {
-  text-decoration: line-through;
-}
-
-ul {
-  padding-left: 0;
-}
-
-.error {
-  color: red;
-  font-size: 333px;
-}
-
-li.list-group-item {
-  text-align: left !important;
 }
