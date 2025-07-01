@@ -1,12 +1,11 @@
 import {useDispatch, useSelector} from "react-redux";
-import {fetchData, getUserData} from "../redux-toolkit/userDataSlice.js";
+import {fetchData, getUserData, addCurrentPerson} from "../redux-toolkit/userDataSlice.js";
 import {useEffect, useState} from "react";
+import DataComponent from "./DataComponent.jsx";
 
 function Form() {
     const dispatch = useDispatch();
-    const [baseUrl, setBaseUrl] = useState('https://swapi.tech/api/people');
-    const [peopleNumber, setPeopleNumber] = useState('');
-
+    const [personNumber, setPersonNumber] = useState('');
     const data = useSelector((state) => state.userData.data);
 
     useEffect(() => {
@@ -15,17 +14,20 @@ function Form() {
 
     function handleSubmit(event) {
         event.preventDefault();
-        dispatch(getUserData());
-        // setPeopleNumber(event.target.value);
-        console.log(data);
+
+        const person = data.find(elem => elem.uid === personNumber);
+
+        dispatch(addCurrentPerson(person))
     }
 
     return(
-        <form className="form d-flex gap-3" onSubmit={handleSubmit}>
-            <input type="text" className="form-control" id="baseUrl" value={baseUrl} onChange={(e) => {setBaseUrl(e.target.value)}} />
-            <input type="text" className="form-control" id="peopleNumber" placeholder="Enter number of people" value={peopleNumber} onChange={(e) => {setPeopleNumber(e.target.value)}} />
-            <button type="submit" className="btn btn-primary">Submit</button>
-        </form>
+        <>
+            <form className="form d-flex gap-3" onSubmit={handleSubmit}>
+                <p>https://swapi.tech/api/people</p>
+                <input type="number" className="form-control" id="personNumber" placeholder="Enter number of people" value={personNumber} onChange={(e) => {setPersonNumber(e.target.value)}} />
+                <button type="submit" className="btn btn-primary">Submit</button>
+            </form>
+        </>
     )
 }
 

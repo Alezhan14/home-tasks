@@ -1,20 +1,19 @@
 import {useDispatch, useSelector} from "react-redux";
-import {fetchData} from "../redux-toolkit/userDataSlice.js";
-import {useEffect} from "react";
+import {clearCurrentPersonData, fetchData} from "../redux-toolkit/userDataSlice.js";
 
-function DataComponent() {
+function DataComponent(currentUser) {
     const dispatch = useDispatch();
-
+    const shownPersonData = useSelector((state) => state.userData.shownPerson);
 
     function handleClear() {
-        // console.log({data});
+        dispatch(clearCurrentPersonData());
     }
 
     return (
         <>
             <div className="d-flex align-items-left flex-column">
                 <div className="border p-3 mb-3">
-                    <p className="text-left">This component will display data fetched from an API.</p>
+                    <p className="text-left">{JSON.stringify(shownPersonData)}</p>
                 </div>
                 <a href="#" className="btn btn-secondary" onClick={handleClear}>Clear</a>
             </div>

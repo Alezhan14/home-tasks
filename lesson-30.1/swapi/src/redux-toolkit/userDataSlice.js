@@ -12,14 +12,15 @@ export const fetchData = createAsyncThunk('userData/fetchData', async () => {
 const userDataSlice = createSlice({
     name: 'userData',
     initialState: {
-        data: []
+        data: [],
+        shownPerson: undefined
     },
     reducers: {
-        getUserData: (state, action) => {
-            console.log('getUserData action dispatched with payload:');
+        addCurrentPerson: (state, action) => {
+            state.shownPerson = action.payload;
         },
-        clearUserData: (state, action) => {
-            console.log('clearUserData action dispatched');
+        clearCurrentPersonData: (state, action) => {
+            state.shownPerson = undefined;
         }
     },
     extraReducers:  (builder) => {
@@ -31,5 +32,5 @@ const userDataSlice = createSlice({
 
 });
 
-export const {getUserData, clearUserData} = userDataSlice.actions;
+export const {getUserData, addCurrentPerson, clearCurrentPersonData} = userDataSlice.actions;
 export default userDataSlice.reducer;
