@@ -6,6 +6,8 @@ import Home from "./pages/Home.jsx";
 import {createBrowserRouter, RouterProvider} from "react-router";
 import Root from "./pages/Root.jsx";
 import Hotels from "./pages/Hotels.jsx";
+// import {ChakraProvider} from "@chakra-ui/react";
+import { Provider } from "./components/ui/provider"
 
 
 const router = createBrowserRouter([
@@ -29,8 +31,11 @@ const router = createBrowserRouter([
     },
 ]);
 
+
 createRoot(document.getElementById('root')).render(
     <StrictMode>
-        <RouterProvider router={router} />
+        <Provider>
+            <RouterProvider router={router} />
+        </Provider>
     </StrictMode>
 )

@@ -1,3 +1,4 @@
+import {Link, NavLink} from "react-router";
 
 function Header() {
     return (
@@ -5,9 +6,36 @@ function Header() {
             <h1>Booking App</h1>
             <nav>
                 <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/about">About</a></li>
-                    <li><a href="/hotels">Hotels</a></li>
+                    <li>
+                        <NavLink
+                            to="/"
+                            className={({ isActive, isPending }) =>
+                                isPending ? "pending" : isActive ? "active" : ""
+                            }
+                        >
+                            Messages
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            to="/about"
+                            className={({ isActive, isPending }) =>
+                                isPending ? "pending" : isActive ? "active" : ""
+                            }
+                        >
+                            About
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            to="/hotels"
+                            className={({ isActive, isPending }) =>
+                                isPending ? "pending" : isActive ? "active" : ""
+                            }
+                        >
+                            Hotels
+                        </NavLink>
+                    </li>
                 </ul>
             </nav>
         </header>
