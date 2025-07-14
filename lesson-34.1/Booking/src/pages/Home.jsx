@@ -1,12 +1,12 @@
-import Header from "../components/Header.jsx";
-import {Button} from "@chakra-ui/react";
+import {Button, Flex} from "@chakra-ui/react";
+import Forms from "../components/Forms.jsx";
+import HotelCard from "../components/Card.jsx";
 
 function Home() {
     return (
         <>
             <div>
-                <h1>HOME</h1>
-                <Button>click</Button>
+                <Forms />
             </div>
         </>
     );
