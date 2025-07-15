@@ -6,7 +6,7 @@ import {useEffect} from "react";
 import {useNavigate} from "react-router";
 
 function Forms() {
-    const {fetchDataHotels, fetchFilteredHotels, destination, formData, hotels, issues} = useHotelStore();
+    const {fetchDataHotels, fetchFilteredHotels, destination, issues} = useHotelStore();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -43,17 +43,20 @@ function Forms() {
 
     return (
         <>
-            <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+            <Formik initialValues={initialValues} onChange={(option) => formik.setFieldValue("creationId", option.value)} onSubmit={handleSubmit}>
                 {({ errors, touched }) => (
                 <Form>
-                    <Flex gap={3} mb={10}>
-                        <Field name="destination" id="destination" as="select" className="form-select">
-                            {
-                                destination.map((item) => (
-                                    <SelectOption option={item.label} key={item.id} />
-                                ))
-                            }
-                        </Field>
+                    <Flex gap={3} mb={20}>
+                        <Box border="1px solid" borderColor="gray.200" borderRadius="sm" py={2} flexGrow={1}>
+                            <Field name="destination" id="destination" as="select" style={{outline: "none"}}>
+                                {
+                                    destination.map((item) => (
+                                        <SelectOption option={item.label} key={item.id} />
+                                    ))
+                                }
+                            </Field>
+                        </Box>
+
                         <Field as={Input} type="date" name="checkIn" id="checkIn" />
                         <Field as={Input} type="date" name="checkOut" id="checkOut" />
                         <Box position="relative">
@@ -69,6 +72,11 @@ function Forms() {
                 </Form>
                 )}
             </Formik>
+            {issues && (
+                <Box color="red" fontSize="md" textAlign="center">
+                    {issues}
+                </Box>
+            )}
         </>
     );
 }

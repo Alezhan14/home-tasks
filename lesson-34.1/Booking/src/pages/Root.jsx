@@ -6,7 +6,7 @@ function Root() {
     return (
         <>
             <Header />
-            <Container maxWidth="6xl" px={4} py={8} fluid="true" color="blue.500">
+            <Container maxWidth="6xl" px={4} py={8} fluid="true">
                 <Outlet />
             </Container>
         </>

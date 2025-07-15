@@ -26,12 +26,13 @@ export const useHotelStore = create((set) => ({
         set({ issues: [] });
         set({formData: values});
         set({ hotels: [] });
+        console.log('Fetching hotels for:', values);
 
         try {
             const response = await fetch(`http://localhost:3000/` + values.destination);
             if (!response.ok) {
-                set({ issues: 'Network response was not ok' });
-                throw new Error('Network response was not ok');
+                set({ issues: 'Not found available hotels in ' + values.destination });
+                throw new Error('Not found available hotels in ' + values.destination);
             }
             const data = await response.json();
             set({ hotels: data });

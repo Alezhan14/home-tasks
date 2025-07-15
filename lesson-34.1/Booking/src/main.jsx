@@ -6,7 +6,7 @@ import Home from "./pages/Home.jsx";
 import {createBrowserRouter, RouterProvider} from "react-router";
 import Root from "./pages/Root.jsx";
 import Hotels from "./pages/Hotels.jsx";
-import {ChakraProvider, createSystem, defaultConfig, defineConfig, Theme} from "@chakra-ui/react";
+import {ChakraProvider, createSystem, defaultConfig, defineConfig} from "@chakra-ui/react";
 
 
 const router = createBrowserRouter([
@@ -33,7 +33,9 @@ const router = createBrowserRouter([
 const config = defineConfig({
     theme: {
         tokens: {
-            colors: {},
+            colors: {
+
+            },
         },
     },
 })
