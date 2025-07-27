@@ -302,7 +302,7 @@ const HOTELS_DATA = {
         },
         {
             "id": 716815,
-            "name": "Hello Broadway",
+            "name": "HeadingToDo Broadway",
             "address": "38 west 31 st",
             "city": "New York",
             "state": "NY",
