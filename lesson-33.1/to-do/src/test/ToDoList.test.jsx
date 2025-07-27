@@ -50,6 +50,7 @@ describe('check text of new to do', () => {
 
         const newItem = screen.getByText('Buy milk');
         expect(newItem).toBeInTheDocument();
+
     })
 })
 
