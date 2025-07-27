@@ -1,13 +1,11 @@
 import { describe, it, expect } from 'vitest';
-import {fireEvent, getByRole, render, screen} from '@testing-library/react';
+import {fireEvent, render, screen} from '@testing-library/react';
 import "@testing-library/jest-dom/vitest"
-import ToDoPage from "../pages/ToDoPage.jsx";
 import HeadingToDo from "../components/HeadingToDo.jsx";
 import Form from "../components/Form.jsx";
 import {Provider} from "react-redux";
 import store from "../redux-toolkit/store.js";
 import ToDoList from "../components/ToDoList.jsx";
-import ToDoListItem from "../components/ToDoListItem.jsx";
 
 describe('Heading', () => {
     it('has heading', () => {
