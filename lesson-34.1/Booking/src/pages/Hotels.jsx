@@ -14,7 +14,7 @@ function Hotels() {
             </Heading>
             <Grid templateColumns="repeat(4, 1fr)" gap={4}>
                 {hotels.map((hotel, index) => (
-                    <HotelCard key={index} hotel={hotel} />
+                    <HotelCard key={index} hotel={hotel} /> 
                 ))}
             </Grid>
         </div>
